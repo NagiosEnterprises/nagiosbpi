@@ -1,6 +1,9 @@
 <?php //constants.inc.php  file for nagios bpi addon 
 
 //grab config info for server and directory from globals.conf file, see read_conf.php for function details
+
+define('DIRBASE', dirname(__FILE__)); //assigns current directory as root 
+
 $globals = fetch_globals();
 
 //get server web address 
@@ -37,7 +40,7 @@ if(isset($globals['XMLOUTPUT']))
 	define('XMLOUTPUT', trim($globals['XMLOUTPUT']));
 }
 
-define('DIRBASE', dirname(__FILE__)); //assigns current directory as root 
+
 
 
 if($globals['XI']==1 || file_exists(dirname(__FILE__).'/../componenthelper.inc.php')) //if installation is Nagios XI 
@@ -47,8 +50,8 @@ if($globals['XI']==1 || file_exists(dirname(__FILE__).'/../componenthelper.inc.p
 	define('NAGIOSURL', SERVERBASE.'/nagiosxi/');
 	define('HOSTDETAIL', NAGIOSURL.'/includes/components/xicore/status.php?show=hostdetail&host=');
 	define('SERVICEDETAIL', NAGIOSURL.'/includes/components/xicore/status.php?show=servicedetail&host=');
-	if(!defined('NAGV')) 
-	{ define('NAGV', 'XI'); }
+	//if(!defined('NAGV')) 
+	@define('NAGV', 'XI'); 
 }
 else
 {

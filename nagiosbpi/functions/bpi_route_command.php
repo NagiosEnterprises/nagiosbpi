@@ -59,69 +59,62 @@ function bpi_route_command($cmd)
 	{
 		///////////////////////////ADD GROUP////////////////////////////
 		case 'add': //and new group form 
-		//do stuff
-		
-		if(isset($_POST['addSubmitted']))
-		{	
+			//do stuff
 			
-			$config=process_post($_POST);
-			if(isset($config))
-			{
-				append_file($config);
-			}	
-			print "<p><a href='index.php?cmd=add'>Add More Groups</a></p>";
-			
-		}
-		else //display empty form if not $_POST is set 
-		{
-			empty_form();
-		}
+			if(isset($_POST['addSubmitted']))
+			{	
+				
+				$config=process_post($_POST);
+				if(isset($config))
+				{
+					append_file($config);
+				}	
+				print "<p><a href='index.php?cmd=add'>Add More Groups</a></p>";
+				
+			}
+			 //display empty form if not $_POST is set
+			else  empty_form();
+
 		break;
 		
 		///////////////////////////DELETE GROUP////////////////////////////
 		case 'delete':
-		//delete stuff
-		if(isset($_GET['arg']))
-		{
-			//add javascript confirmation of group deletion 
-			$arg = htmlentities(trim($_GET['arg']));
-			delete_group($arg);
-		}
-		else
-		{
-			print "<p class='error'>Error: No BPI Group specifies to delete.</p>";
-		} 
+			//delete stuff
+			if(isset($_GET['arg']))
+			{
+				//add javascript confirmation of group deletion 
+				$arg = htmlentities(trim($_GET['arg']));
+				delete_group($arg);
+			}
+			else  print "<p class='error'>Error: No BPI Group specifies to delete.</p>";
+ 
 		break;
 		
 		///////////////////////////EDIT GROUP////////////////////////////
 		case 'edit':
-		//edit existing groups 
-		if(isset($_GET['arg']))
-		{
-			//add javascript confirmation of group deletion 
-			$arg = htmlentities(trim($_GET['arg']));
-			$config = get_config_array($arg);
-			
-			if(isset($_POST['editSubmitted']))
+			//edit existing groups 
+			if(isset($_GET['arg']))
 			{
-				$config=process_post($_POST);	//process the form data, make sure it comes back valid  
-				if(isset($config))
+				//add javascript confirmation of group deletion 
+				$arg = htmlentities(trim($_GET['arg']));
+				$config = get_config_array($arg);
+				
+				if(isset($_POST['editSubmitted']))
 				{
-					edit_group($arg, $config);
-				} 				
-			}
-			else
-			{
+					$config=process_post($_POST);	//process the form data, make sure it comes back valid  
+					if(isset($config))  edit_group($arg, $config);				
+				}
 				//if form hasn't been submitted, preload the form with config data 
-				loaded_form($config);
+				else  loaded_form($config);
 			}
-		}
-		//missing arguments in $_GET 
-		else
-		{
-			print "<p class='error'>Error: No BPI Group specifies to delete.</p>";
-		} 
+			//missing arguments in $_GET 
+			else print "<p class='error'>Error: No BPI Group specifies to delete.</p>";
+
 		break;
+		
+		case 'fixconfig':
+			include('config_functions/fix_config.php'); 
+		break; 
 		
 		default: //default to view page if value is bad 
 		send_home();

@@ -59,25 +59,15 @@ $statecount = 0;
 $unique = 0;
 $config = true;
 $errors = '';
+$bpiroot = dirname(__FILE__); 
 
 //initialize all BpGroup instances and determine properties of all groups
 //see bpi_functions.php for function details  
 bpi_init();  
 
-//handler for bad configurations 
-if($config!=true)
-{
-	//print_r($errors);
-	//allow for manual editing of the configuration file, and send error messages to that page 
-	print "<p class='error'>Error in configuration.  Page cannot be displayed.</p>
-			<form id='errorlog' method='post' action='fix_config.php'>
-			 <input type='submit' value='Edit Configuration File' name='submit' />";
-	//submit error messages as posts 		 
-		print "<input type='hidden' name='errors' value=\"$errors\" />";
+//check for correct permissions
 
-	print "</form>";
-	die();
-}
+error_check(); 
 
 //handle any page requests and redirection
 //see bpi_functions.php for function details 

@@ -49,8 +49,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-include(dirname(__FILE__).'/../header.php');
-include(dirname(__FILE__).'/../inc.inc.php');
+//include(dirname(__FILE__).'/../header.php');
+//include(dirname(__FILE__).'/../inc.inc.php');
 
 
 if(isset($_POST['newconfig']) )
@@ -63,18 +63,17 @@ else
 	//generate error output to debug file 	
 	//only access this page to debug, not for regular configuration editing 
 	if(isset($_POST['errors']))
-	{
-	
+	{	
 		print "<h3>BPI Configuration Editor</h3>";
 		print "<p class='error'>Warning: Do NOT make changes to this file unless you know what you're doing!<br /><br />";
 		$errors = $_POST['errors'];
 		print $errors;
-		print "</p>";
+		print "</p><br />";
 		config_editor();
 	}
 }
 
-include(dirname(__FILE__).'/../footer.php');
+//include(dirname(__FILE__).'/../footer.php');
 
 //end main 
 ////////////////////////////////////////////////////////////////////
@@ -83,11 +82,11 @@ include(dirname(__FILE__).'/../footer.php');
 function config_editor()
 {
 	$contents = file_get_contents(CONFIGFILE);
-	print "<form id='configedit' action='fix_config.php' method='post'>\n
+	print "<div id='configEditor'><form id='configedit' action='index.php?cmd=fixconfig' method='post'>\n
 				<textarea name='newconfig' id='newconfig1' rows='30' cols='120'>$contents</textarea><br />
 				<input type='submit' name='submit' value='Save' />
 				<input type='hidden' name='configeditor' value='true' />
-			</form>";
+			</form></div>";
 }
 
 

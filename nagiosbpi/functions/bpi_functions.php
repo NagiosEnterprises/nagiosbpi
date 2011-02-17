@@ -277,7 +277,38 @@ function page_filter($filter)
 
 }
 
+function error_check()
+{
+	global $errors;
+	global $config; 
+	global $bpiroot; 
+	if(!is_writable(CONFIGFILE)) 
+	{
+		print "<p class='error'>File bpi.conf is not writable!  Please execute the following commands as the root user to set correct permissions: </p>"; 
+		print "<pre>
+		cd $bpiroot 
+		chmod +x set_bpi_perms.sh
+		./set_bpi_perms.sh 
+		</pre><br />"; 
+	} 
 
+	//handler for bad configurations 
+	//make this form disappear once fixconfig is accessed 
+	if($config!=true || $errors != '')
+	{
+		//print_r($errors);
+		//allow for manual editing of the configuration file, and send error messages to that page 
+		if(
+		print "<p class='error'>WARNING: Errors in configuration file.</p>
+				<form id='errorlog' method='post' action='index.php?cmd=fixconfig'>
+				 <input type='submit' value='Edit Configuration File' name='submit' />";
+		//submit error messages as posts 		 
+			print "<input type='hidden' name='errors' value=\"$errors\" />";
+
+		print "</form>";
+		//die();
+	}
+}
 
 
 
