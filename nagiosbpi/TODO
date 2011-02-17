@@ -1,0 +1,45 @@
+ToDo List for NagiosBPI
+
+
+MODEL/DATA:
+
+
+
+VIEW/INTERFACE:
+
+
+
+LOGIC/CONTROLLER:
+
+
+
+
+
+MISC:
+
+
+FEATURE REQUESTS:
+Would it be possible to propagate errors upwards in order of importance?
+
+Let me explain better:
+
+Instead of simple number of errors, propagate in order of gravity (warning or critical).
+
+For example:
+If a group is composed of three services, I might want to propagate a WARNING even when there are two services on error WARNING while I propagate a CRITICAL in presence of a single service to critical. 
+
+When you're in configuration and you click the refresh (which now works), you risks to lose the data entered up to that time.
+
+ 
+
+The refresh brings you to the main page while you are in configuration.
+
+ 
+
+Maybe we should use a cache to return to the page you're working on.
+
+
+DOCUMENTATION:
+- install and permissions 
+- how to create a working check for a bpi group 
+

@@ -1,0 +1,139 @@
+/*  stylesheet for Nagios BPI addon */
+
+/*
+// Nagios BPI (Business Process Intelligence) 
+// Copyright (c) 2010 Nagios Enterprises, LLC.
+// Written by Mike Guthrie <mguthrie@nagios.com>
+//
+// LICENSE:
+//
+// This work is made available to you under the terms of Version 2 of
+// the GNU General Public License. A copy of that license should have
+// been provided with this software, but in any event can be obtained
+// from http://www.fsf.org.
+// 
+// This work is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// 02110-1301 or visit their web page on the internet at
+// http://www.fsf.org.
+//
+//
+// CONTRIBUTION POLICY:
+//
+// (The following paragraph is not intended to limit the rights granted
+// to you to modify and distribute this software under the terms of
+// licenses that may apply to the software.)
+//
+// Contributions to this software are subject to your understanding and acceptance of
+// the terms and conditions of the Nagios Contributor Agreement, which can be found 
+// online at:
+//
+// http://www.nagios.com/legal/contributoragreement/
+//
+//
+// DISCLAIMER:
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+// PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+// HOLDERS BE LIABLE FOR ANY CLAIM FOR DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
+// OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE 
+// GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, STRICT LIABILITY, TORT (INCLUDING 
+// NEGLIGENCE OR OTHERWISE) OR OTHER ACTION, ARISING FROM, OUT OF OR IN CONNECTION 
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+body { font-family: verdana, arial; font-size: 8pt; }
+
+h4, h5 { margin: 3px; padding: 3px; }
+
+h4.mainheader {margin: 10px; }
+ul {  margin: 1px 1px 10px 1px; }
+
+td, th { padding: 1px 5px; border: 1px solid #BFBFBF; text-align: center; }
+
+li { list-style: none; }
+
+table.groupdata {border-color: #AAA; }
+
+select {margin: 5px 0px; }
+
+/* textarea { width:80%; height:80%; } */
+
+a {color: #4D89F9; text-decoration:none; }
+a img {border:none; }
+tr.even { background-color: #Efefef; } /* dark table rows */
+tr.odd {background-color: #FFF; }      /* light table rows */
+
+.Ok { background-color: #b2ff5f; }  /*status colors */
+.Warning { background-color: #FEFF5F; }
+.Critical {  background-color: #FF795F; }
+.Unknown  { background-color: #FFC45F; }
+
+/*fixed width for state td */
+td.Ok, th.Ok, td.Warning, th.Warning, td.Critical, th.Critical, td.Unknown, th.Unknown {  width: 50px;}
+
+/*error messages */
+.error { color:red; }
+
+/*hidden groups and list items */
+td.group, th.group {background-color: #DADADA; }
+.grouphide{ 	 }
+.grouphide:before { content: url('images/expand1.png'); padding-right:4px; display:inline;}
+
+/* expanded groups and list items */
+.groupexpand { }
+.groupexpand:before { content: url('images/collapse.png');  padding-right:4px; display:inline; }
+
+/*link to create new groups */
+#addgrouplink { position: absolute; right: 20px; top: 20px; }
+
+/*main header*/
+h2.mainheader { margin: 5px auto; text-align: center;}
+
+#selectoutput  { 
+	border: 1px solid #AAA; 
+	width: 300px; 
+	padding: 10px;
+	 }
+
+p.note { color: #AAA; font-style: italic;}
+
+
+/*containers for config editor */ 
+
+div.container { 
+	width:700px; 
+	margin: 0px auto; 
+
+}
+
+#outputform
+{}
+
+div.floatLeft { 
+
+	width: 400px;
+	float: left; 
+
+	 }
+div.floatRight
+{
+
+	width: 300px;
+	/*clear:both; */
+	float:left;
+
+}
+
+#clearMembersLink {margin-left:110px;}
+
+/*info tooltips on config editor */
+img.tooltip {vertical-align: text-bottom;}
