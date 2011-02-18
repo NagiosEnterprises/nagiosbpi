@@ -58,12 +58,15 @@
 <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8"/>
 <meta http-equiv="content-style-type" content="text/css"/>
 <link rel="stylesheet" href="bpi_style.css" type="text/css" media="screen" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="bpi.js"></script>
 <script type="text/javascript">
+$(document).ready(function() {
+	hide(); 
+});
 
 </script>
 </head>
-<body onload="hide()">
+<body>
 
 <h2 class='mainheader'>Nagios Business Process Intelligence</h2>

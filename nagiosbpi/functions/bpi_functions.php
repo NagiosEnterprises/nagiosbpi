@@ -298,15 +298,17 @@ function error_check()
 	{
 		//print_r($errors);
 		//allow for manual editing of the configuration file, and send error messages to that page 
-		if(
-		print "<p class='error'>WARNING: Errors in configuration file.</p>
-				<form id='errorlog' method='post' action='index.php?cmd=fixconfig'>
-				 <input type='submit' value='Edit Configuration File' name='submit' />";
-		//submit error messages as posts 		 
-			print "<input type='hidden' name='errors' value=\"$errors\" />";
 
-		print "</form>";
-		//die();
+        if(isset($_POST['errors']) || isset($_POST['configeditor']) || isset($_GET['cmd']) ) return;  //do nothing
+        else
+		{	//submit error messages as posts 
+			print "<p class='error'>WARNING: Errors in configuration file.</p>
+					<form id='errorlog' method='post' action='index.php?cmd=fixconfig'>
+					   <input type='submit' value='Edit Configuration File' name='submit' />
+					   <input type='hidden' name='errors' value=\"$errors\" />
+					</form>"; 
+		}
+		
 	}
 }
 

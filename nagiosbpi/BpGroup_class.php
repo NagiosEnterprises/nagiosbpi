@@ -99,7 +99,7 @@ class BpGroup
 		else //error catch 
 		{
 			$err = "Error: Group $key is missing arguments in configuration file";
-			print "<p class='error'>$err</p>";
+			//print "<p class='error'>$err</p>";
 			$errors.=$err.'<br />';
 		}
 	}
@@ -242,7 +242,7 @@ class BpGroup
 				{
 					$config = false;
 					$err = "Error: Processing $this->name Object with index $groupindex does not exist, check configuration";
-					print "<p class='error'>$err</p>";
+					//print "<p class='error'>$err</p>";
 					$errors.=$err.'<br />';
 
 				} 							
@@ -258,7 +258,7 @@ class BpGroup
 					$opt = ''; 
 					$config = false;
 					$err = "Error: Missing '&' or '|' option for Group: ".$this->name." <br />Member:".$items[0].' '.$items[1];
-					print "<p class='error'>$err</p>";
+					//print "<p class='error'>$err</p>";
 					$errors.=$err.'<br />';
 				}
 				
@@ -432,7 +432,7 @@ TABLEITEM;
 		{
 			$config = false;
 			$err = "Error: Can't find a service with host:$host service:$service, check configuration for group: '".$this->name."'";
-			print "<p class='error'>$err</p>";
+			//print "<p class='error'>$err</p>";
 			$errors.=$err.'<br />';
 		} 
 	}//end get_service_state();

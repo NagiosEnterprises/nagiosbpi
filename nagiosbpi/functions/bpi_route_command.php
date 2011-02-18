@@ -53,14 +53,14 @@
 function bpi_route_command($cmd)
 {
 	print "<p class='gohome'><a href='index.php'>BPI Home</a></p>";
-	print "<div class='container'>";
+	
 	
 	switch($cmd)
 	{
 		///////////////////////////ADD GROUP////////////////////////////
 		case 'add': //and new group form 
 			//do stuff
-			
+			print "<div class='container'>";
 			if(isset($_POST['addSubmitted']))
 			{	
 				
@@ -74,7 +74,7 @@ function bpi_route_command($cmd)
 			}
 			 //display empty form if not $_POST is set
 			else  empty_form();
-
+			print "</div>\n";
 		break;
 		
 		///////////////////////////DELETE GROUP////////////////////////////
@@ -92,6 +92,7 @@ function bpi_route_command($cmd)
 		
 		///////////////////////////EDIT GROUP////////////////////////////
 		case 'edit':
+			print "<div class='container'>";
 			//edit existing groups 
 			if(isset($_GET['arg']))
 			{
@@ -109,7 +110,7 @@ function bpi_route_command($cmd)
 			}
 			//missing arguments in $_GET 
 			else print "<p class='error'>Error: No BPI Group specifies to delete.</p>";
-
+			print "</div>\n";
 		break;
 		
 		case 'fixconfig':
@@ -121,7 +122,7 @@ function bpi_route_command($cmd)
 		break;
 	} //end SWITCH 
 		
-	print "</div>\n";
+	
 
 
 } //end bpi_route_command() 
