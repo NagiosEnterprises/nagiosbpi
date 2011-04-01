@@ -72,7 +72,7 @@ $config = true;
 
 
 //run the api tool 
-do_stuff();
+@do_stuff();
 
 function do_stuff()
 {
