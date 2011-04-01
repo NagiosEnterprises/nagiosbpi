@@ -1,4 +1,4 @@
-#!/usr/bin/php 
+#!/usr/bin/php -q
 <?php
 $file = '/var/www/http_public/nagiosbpi/api_tool.php'; 
 include($file);
