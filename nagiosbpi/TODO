@@ -4,9 +4,12 @@ ToDo List for NagiosBPI
 MODEL/DATA:
 - fix bug for when a single service is "warning," the group is only at warning, not critical
 - add hosts checks to selectable options 
+- create api page to pull XML data from 
 
 VIEW/INTERFACE:
 - create popout to allow view both direct child and recursive statistics 
+- use AJAX calls to refresh group status every 30-X amount of seconds 
+- static table field widths for host and service names 
 
 LOGIC/CONTROLLER:
 - create sortability by service, status, or group priority 
