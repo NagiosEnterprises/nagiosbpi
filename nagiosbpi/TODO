@@ -2,21 +2,16 @@ ToDo List for NagiosBPI
 
 
 MODEL/DATA:
-
-
+- fix bug for when a single service is "warning," the group is only at warning, not critical
+- add hosts checks to selectable options 
 
 VIEW/INTERFACE:
-
-
+- create popout to allow view both direct child and recursive statistics 
 
 LOGIC/CONTROLLER:
-
-
-
-
+- create sortability by service, status, or group priority 
 
 MISC:
-
 
 FEATURE REQUESTS:
 Would it be possible to propagate errors upwards in order of importance?
@@ -31,11 +26,8 @@ If a group is composed of three services, I might want to propagate a WARNING ev
 When you're in configuration and you click the refresh (which now works), you risks to lose the data entered up to that time.
 
  
-
 The refresh brings you to the main page while you are in configuration.
-
  
-
 Maybe we should use a cache to return to the page you're working on.
 
 
