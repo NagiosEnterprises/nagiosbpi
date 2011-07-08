@@ -17,6 +17,11 @@ LOGIC/CONTROLLER:
 MISC:
 
 FEATURE REQUESTS:
+
+- add in the pseudo states for acknowledged, scheduled, unhandled, and pending and factor those in to the group logic.  
+- user level filtering for Nagios XI  
+- enable caching for data and page navigation 
+
 Would it be possible to propagate errors upwards in order of importance?
 
 Let me explain better:
