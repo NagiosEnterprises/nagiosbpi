@@ -48,22 +48,30 @@
 // NEGLIGENCE OR OTHERWISE) OR OTHER ACTION, ARISING FROM, OUT OF OR IN CONNECTION 
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
+define('STATUSFILE','/usr/local/nagios/var/status.dat'); 
+ini_set('display_errors','on'); 
 
 //expects 'host' or 'service' or 'program' as an argument 
-function grab_details($type)
+function grab_details()
 {
 
 	$f = fopen(STATUSFILE, "r") or exit("Unable to open status.dat file!"); 
-	$details = array(); 
+	$hostdetails = array(); 
+	$servicedetails = array(); 
 	
 	//counters for iteration through file 
-	$counter = 0;		
+	$hostcounter = 0;
+	$servicecounter = 0;		
 	$case = 0;
 	$service_id=0;
+	$host_id=0; 
 
-		$keystring = $type.'status {';
+	$hoststring = 'hoststatus {';
+	$servicestring = 'servicestatus {'; 	
 		//echo "key is $keystring";
+	$matches = array('host_name','service_description','current_state',
+							'last_check','has_been_checked','plugin_output',
+							'problem_has_been_acknowledged',	'scheduled_downtime_depth' ); 
 
 		
 	while(!feof($f)) //read through file and assign host and service status into separate arrays 
@@ -71,17 +79,27 @@ function grab_details($type)
 	
 		//var_dump($line)."<br />";
 		$line = fgets($f); //Gets a line from file pointer.
+//		print $line."<br />"; 
 		
-		if(ereg($keystring, $line))
+		if(strpos($line,$hoststring)!==false)
 		{
-			//echo "starting grab?<br /><br />";
+//			echo "<h3>Found Host</h3>";
 			$case = 1; //enable grabbing of host variables
-			$counter++;			
-			$details[$type.$counter] = array(); //starts a new service array
-			$service_id++; 		 				
+			$hostcounter++;			
+			$hostdetails[$hostcounter] = array(); //starts a new service array
+			$host_id++; 		 				
 		}	
 		
-		if(ereg('}', $line) )
+		if(strpos($line,$servicestring)!==false)
+		{
+//			echo "<h3>Found Service</h3>";
+			$case = 2; //enable grabbing of service variables
+			$servicecounter++;			
+			$servicedetails[$servicecounter] = array(); //starts a new service array
+			$service_id++; 		 				
+		}
+		
+		if(strpos($line, '}') !==false)
 		{	 
 			$case = 0; //turn off switches once a definition ends 		
 		}
@@ -96,12 +114,14 @@ function grab_details($type)
 					
 			case 1: //service definition
 			//do something
-			if(!ereg($keystring, $line) ) //eliminate definition line 
+			if(strpos($line,$hoststring)!==0 ) //eliminate definition line 
 			{
 				
 				//echo "should be grabbing a line<br />";
-				$strings = explode('=', trim($line));			
+				$strings = explode('=', $line);			
 				$key = trim($strings[0]);
+				if(!in_array($key,$matches)) break; 
+//				echo $line."<br />"; 
 				$value = trim($strings[1]);
 				//added conditional to count for '=' signs in the performance data 
 				if(isset($strings[2]))
@@ -113,16 +133,43 @@ function grab_details($type)
 						$i++;
 					}
 				}
-				$details[$type.$counter][$key]= $value;
-				$details[$type.$counter]['service_id']= $service_id;
+				$hostdetails[$hostcounter][$key]= $value;
+				$hostdetails[$hostcounter]['host_id']= $host_id;
+				
+			}
+			break;
+			
+			case 2: //service status  
+			if(strpos($line,$servicestring)!==0) //eliminate definition line 
+			{
+				//echo "should be grabbing a line<br />";
+				
+				$strings = explode('=',$line);			
+				$key = trim($strings[0]);
+				if(!in_array($key,$matches)) break; 
+				$value = trim($strings[1]);
+//				echo $line."<br />"; 
+				//added conditional to count for '=' signs in the performance data 
+				if(isset($strings[2]))
+				{
+					$i=2;
+					while(isset($strings[$i]))
+					{
+						$value.='='.$strings[$i]; //used for performance data 
+						$i++;
+					}
+				}
+				$servicedetails[$servicecounter][$key]= $value;
+				$servicedetails[$servicecounter]['service_id']= $service_id;
 				
 			}
 			break;
 			
 		}	//end of switch 				
 	} //end of while	
-	return $details;
+	
 	fclose($f);	
+	return array('host' => $hostdetails, 'service' => $servicedetails);
 
 }//end of grab_host_details function 
 
@@ -130,9 +177,9 @@ function grab_details($type)
 
 //status detail arrays for application use 
 //USAGE:   
-//$hostdetails = grab_details('host');
-//$servicedetails = grab_details('service');
-//print_r($hostdetails);
+$details = grab_details();
+//$details = grab_details('service');
+print_r($details['host']); 
 
 
 
