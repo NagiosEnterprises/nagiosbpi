@@ -108,6 +108,7 @@ function bpi_init()
 			print "<p class='error'>Error determining status for all groups, too many iterations.  Check configuration file.</p>";
 		}
 	}
+	else echo "CONFIG IS FALSE"; 
 	
 	//optionally output xml data 
 	if(defined('XMLOUTPUT'))

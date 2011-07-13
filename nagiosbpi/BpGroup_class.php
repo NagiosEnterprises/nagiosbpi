@@ -247,6 +247,43 @@ class BpGroup
 
 				} 							
 			}
+			elseif(isset($items[1]) && $items[1]=='NULL' )  ////////////HOST///////////// 
+			{
+				//print "<p>".$items[0].$items[1]." This is a process</p>"; 
+				//put this into assoc array, then spit into display function
+				if(isset($items[2]))
+				{ $opt = $items[2]; } //read for & or | option 
+				else 
+				{ 
+					$opt = ''; 
+					$config = false;
+					$err = "Error: Missing '&' or '|' option for Group: ".$this->name." <br />Member:".$items[0].' '.$items[1];
+					//print "<p class='error'>$err</p>";
+					$errors.=$err.'<br />';
+				}
+				
+				$host = $items[0];
+				$service = $items[1];	//should be NULL 			
+				$status = $this->get_object_state($host, $service);	//get data array for service 	
+				if($status > 0)
+				{
+					$this->problems++; //add to object problem counter 
+				}
+				//create return service state function 				
+				$plugin_output = $status['plugin_output']; //return plugin_output function   
+				$hostdata = array( 'host_name' => $host,										
+											 'membername' => $host,
+											 'option' => $opt,
+											 'current_state' => $status['current_state'],
+											 'plugin_output' => $plugin_output,
+											  'parent' => $this->name,
+											  'type' => 'host',
+											 );
+				
+				//print "Service: $service <br/> Host: $host <br /> State: $state <br /> Output: $plugin_output <br />";
+				$this->append_service_children($hostdata);
+				$this->append_memberlist($hostdata);		
+			}
 			else //child is a service, process info  
 			{
 				//print "<p>".$items[0].$items[1]." This is a process</p>"; 
@@ -264,7 +301,7 @@ class BpGroup
 				
 				$host = $items[0];
 				$service = $items[1];				
-				$status = $this->get_service_state($host, $service);	//get data array for service 	
+				$status = $this->get_object_state($host, $service);	//get data array for service 	
 				if($status > 0)
 				{
 					$this->problems++; //add to object problem counter 
@@ -350,6 +387,36 @@ LISTITEM;
 				print $listitem;
 
 			}
+			elseif($child['type'] == 'host') //add a type property for group or service 
+			{
+				if(NAGV=='XI')
+				{
+					$hostlink = HOSTDETAIL.$child['host_name']; //url for host 					
+				}		
+				else //nagios core 
+				{
+					$host = preg_replace('/ /', '+', trim($child['host_name']));
+					$hostlink = HOSTDETAIL.$host;
+					//http://localhost/nagios/cgi-bin/extinfo.cgi?type=2&host=XI+Demo&service=HTTP
+				}
+			
+				//BEGIN hereroc string		
+				$listitem=<<<LISTITEM
+						 <li class='servicelisting'>
+				         <table class='servicedata'>
+				         	<tr class='{$class}'>
+				         		<td class='{$state}'>{$state}{$optmarker}</td>
+				         		<td><strong><a href='{$hostlink}' target='_blank'>{$child['host_name']}</a></strong></td>
+				         <!--		<td></td> -->
+				         		<td>{$child['plugin_output']}</td>
+				         	</tr>
+				         </table>
+				       </li>				       
+LISTITEM;
+				//print heredoc string 				
+				print $listitem;
+
+			}			
 			elseif($child['type'] == 'group')  //GROUP listings  
 			{
 				$unique++; //used for jquery ID 
@@ -405,36 +472,69 @@ TABLEITEM;
 	///////////////////////////////////////////////////////////////
 	//	expecting a hostname and service description as argument
 	// scans 'service status' information and returns an array of 'current_state' and 'plugin_output'
-	function get_service_state($host, $service)
+	function get_object_state($host, $service='NULL')
 	{
 		//print "<p>function get_service_state()</p>";
 		global $errors;
 		global $service_details;
+		global $host_details; 
 		global $config;
-		foreach($service_details as $sd)
+		
+		if($service=='NULL')
 		{
-			//var_dump($service);
-			//print "<br /><br />";
-			
-			if(trim($sd['host_name'])==trim($host) && trim($sd['service_description'])==trim($service))
+			foreach($host_details as $hd)
 			{
-				//create array for desired service stats.  Add more items as needed.
-				//$state = $this->return_service_state($sd['current_state']);   
-				$status = array( 'current_state' => $sd['current_state'],
-									  'plugin_output' => $sd['plugin_output']
-									  ); 
-				//return state and plugin output 					  
-				return $status;
-			}
-
-		}//end FOREACH
-		if(!isset($status)) //error catch for bad naming in config file 
-		{
-			$config = false;
-			$err = "Error: Can't find a service with host:$host service:$service, check configuration for group: '".$this->name."'";
-			//print "<p class='error'>$err</p>";
-			$errors.=$err.'<br />';
-		} 
+				//var_dump($service);
+				//print "<br /><br />";
+				
+				if(trim($hd['host_name'])==trim($host))
+				{
+					//create array for desired service stats.  Add more items as needed.
+					//$state = $this->return_service_state($sd['current_state']);   
+					$status = array( 'current_state' => $hd['current_state'],
+										  'plugin_output' => $hd['plugin_output']
+										  ); 
+					//return state and plugin output 					  
+					return $status;
+				}
+	
+			}//end FOREACH
+			if(!isset($status)) //error catch for bad naming in config file 
+			{
+				$config = false;
+				$err = "Error: Can't find the host:$host, check configuration for group: '".$this->name."'";
+				//print "<p class='error'>$err</p>";
+				$errors.=$err.'<br />';
+			} 
+		}
+		else //grabbing a service details 
+		{		
+			foreach($service_details as $sd)
+			{
+				//var_dump($service);
+				//print "<br /><br />";
+				
+				if(trim($sd['host_name'])==trim($host) && trim($sd['service_description'])==trim($service))
+				{
+					//create array for desired service stats.  Add more items as needed.
+					//$state = $this->return_service_state($sd['current_state']);   
+					$status = array( 'current_state' => $sd['current_state'],
+										  'plugin_output' => $sd['plugin_output']
+										  ); 
+					//return state and plugin output 					  
+					return $status;
+				}
+	
+			}//end FOREACH
+			if(!isset($status)) //error catch for bad naming in config file 
+			{
+				$config = false;
+				$err = "Error: Can't find a service with host:$host service:$service, check configuration for group: '".$this->name."'";
+				//print "<p class='error'>$err</p>";
+				$errors.=$err.'<br />';
+			} 
+		
+		}
 	}//end get_service_state();
 	
 	///////////////////////////////////////////////////////////////////

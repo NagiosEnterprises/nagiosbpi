@@ -48,11 +48,13 @@
 // NEGLIGENCE OR OTHERWISE) OR OTHER ACTION, ARISING FROM, OUT OF OR IN CONNECTION 
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+//ini_set('display_errors','on'); 
+
 include('header.php');  //html header stuff 
 include('inc.inc.php');  //master include file for all functions and classes 
 
 $info = get_info(); //read info from main configuration file (bpi.conf) 
-$service_details = grab_details('service'); //global array of service status from status.dat file 
+list($host_details,$service_details) = grab_details(); //global array of service status from status.dat file  
 $objects = array(); //main array of bpi group objects 
 $obj_count = 0;
 $statecount = 0;

@@ -54,6 +54,7 @@ function empty_form()
 {
 	global $objects;
 	global $service_details;
+	global $host_details;
 		//begin heredoc string 
 	$outputform=<<<OUTPUTFORM
 	
@@ -107,20 +108,26 @@ OUTPUTFORM;
 	//end heredoc string
 	print $outputform;
 	
-	print "<label for='multiple'>Available Groups and Services</label><br />
+	print "<label for='multiple'>Available Hosts (H:), Groups (G:), and Services (S:)</label><br />
 				<select id='multiple' multiple='multiple' size='10'>";
 
+	//add host definitions
+	foreach($host_details as $host)
+	{
+		print "<option value='{$host['host_name']};NULL'>H: {$host['host_name']}</option>\n";
+	}	
+	
 	//add groups to select list as options 
 	foreach($objects as $object)
 	{
-		print "<option value='$".$object->name."'>".$object->title." (Group) </option>\n";
+		print "<option value='$".$object->name."'>G: ".$object->title."</option>\n";
 	} 
 	//add hostname;service to select list 
 	foreach($service_details as $service)
 	{
 		//create the identifier for a service 
-		$var = trim($service['host_name']).';'.trim($service['service_description']);
-		print "<option value='$var'>$var</option>\n";
+		$var = $service['host_name'].';'.$service['service_description'];
+		print "<option value='$var'>S: $var</option>\n";
 	}
 		
 	print "</select><br />";	
@@ -162,6 +169,7 @@ function loaded_form($array)
 {
 	global $objects;
 	global $service_details;
+	global $host_details;
 		//begin heredoc string 
 	$primary = $array['primary'] == 1 ? " checked='checked' " : '' ;
 	$priority = $array['priority'];
@@ -263,17 +271,25 @@ OUTPUTFORM;
 	print "<label for='multiple'>Available Groups and Services</label><br />
 				<select id='multiple' multiple='multiple' size='10'>";
 
+
+	//add host definitions
+	foreach($host_details as $host)
+	{
+		print "<option value='{$host['host_name']};NULL'>H: {$host['host_name']}</option>\n";
+	}	
+
+
 	//add groups to select list as options 
 	foreach($objects as $object)
 	{
-		print "<option value='$".$object->name."'>".$object->title." (Group) </option>\n";
+		print "<option value='$".$object->name."'>G: ".$object->title." (Group) </option>\n";
 	} 
 	//add hostname;service to select list 
 	foreach($service_details as $service)
 	{
 		//create the identifier for a service 
 		$var = trim($service['host_name']).';'.trim($service['service_description']);
-		print "<option value='$var'>$var</option>\n";
+		print "<option value='$var'>S: $var</option>\n";
 	}		
 	print "</select><br />";	
 	///////////////////////////////////end select list ///////////////////////////

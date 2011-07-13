@@ -48,8 +48,8 @@
 // NEGLIGENCE OR OTHERWISE) OR OTHER ACTION, ARISING FROM, OUT OF OR IN CONNECTION 
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-define('STATUSFILE','/usr/local/nagios/var/status.dat'); 
-ini_set('display_errors','on'); 
+//define('STATUSFILE','/usr/local/nagios/var/status.dat'); 
+//ini_set('display_errors','on'); 
 
 //expects 'host' or 'service' or 'program' as an argument 
 function grab_details()
@@ -169,7 +169,7 @@ function grab_details()
 	} //end of while	
 	
 	fclose($f);	
-	return array('host' => $hostdetails, 'service' => $servicedetails);
+	return array($hostdetails, $servicedetails);
 
 }//end of grab_host_details function 
 
@@ -177,9 +177,9 @@ function grab_details()
 
 //status detail arrays for application use 
 //USAGE:   
-$details = grab_details();
+//$details = grab_details();
 //$details = grab_details('service');
-print_r($details['host']); 
+//print_r($details['host']); 
 
 
 
