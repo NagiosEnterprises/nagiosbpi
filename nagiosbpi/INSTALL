@@ -71,8 +71,10 @@ chmod +x set_bpi_perms.sh
 Installation on Nagios XI
 ==========================================
 - Download the zip file onto a machine that can access XI from the web interface
-- Go to the Admin->Manage Components page
+- ***For upgrades***:
+	- cp /usr/local/nagiosxi/html/includes/components/nagiosbpi/bpi.conf /tmp/bpi.conf- Go to the Admin->Manage Components page
 - Upload the zip file using the upload tool on the page
+- chmod +x /usr/local/nagiosxi/html/includes/components/nagiosbpi/set_bpi_perms.sh
 - Execute the /usr/local/nagiosxi/html/includes/components/nagiosbpi/set_bpi_perms.sh script 
 - Nagios BPI should be accessible from the main-left menu of Nagios XI  
 
@@ -80,8 +82,20 @@ Installation on Nagios XI
 
 RUNNING A NAGIOS CHECK FOR BPI GROUPS 
 =====================================
--Edit the 'check_bpi.php' file to point to the directory location of the 'api_tool.php' file.  
--Example:
+
+NAGIOS XI
+=========
+- Download and install the BPI Wizard to create checks for your BPI groups.
+- http://exchange.nagios.org/directory/Addons/Configuration/Configuration-Wizards/Nagios-Business-Process-Intelligence-%28BPI%29-Wizard/details
+
+
+NAGIOS CORE
+===========
+- Download the check_bpi.php script
+- http://exchange.nagios.org/components/com_mtree/attachment.php?link_id=2335&cf_id=29
+- Edit the 'check_bpi.php' file to point to the directory location of the 'api_tool.php' file.  
+- Example:
+
   #!/usr/bin/php 
   <?php
   $file = '/var/www/http_public/nagiosbpi/api_tool.php'; 

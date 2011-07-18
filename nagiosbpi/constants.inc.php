@@ -4,6 +4,8 @@
 
 define('DIRBASE', dirname(__FILE__)); //assigns current directory as root 
 
+define('VERSION','1.3'); 
+
 $globals = fetch_globals();
 
 //get server web address 

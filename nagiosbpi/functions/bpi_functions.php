@@ -224,9 +224,15 @@ function bpi_page_router()
 	else //no get variables, page defaults to 'view' mode 
 	{	
 		//////Default Display/////
-		print "<div id='addgrouplink'><a href='index.php?cmd=add'>Create A New Group</a></div>";
-		print "<div id='notes'><p class='note'>Essential group members are denoted with: **</p></div>";
-		print "<h4 class='header'><a href='index.php?filter=1'>High Priority</a></h4>\n";
+		print "<div id='addgrouplink'><a href='index.php?cmd=add'>Create A New Group</a><br />
+		
+				   <p class='note'>Nagios BPI v".VERSION." 
+				     <br />written by Mike Guthrie
+					 <br />Nagios Enterprises
+					 <a href='http://support.nagios.com/forum/' title='Nagios Forums'>Support Forum</a></p>
+			  </div>
+				<div id='notes'><p class='note'>Essential group members are denoted with: **</p></div>
+				<h4 class='header'><a href='index.php?filter=1'>High Priority</a></h4>\n";
 		bpi_view('1'); //display all group trees 
 		print "<h4 class='header'><a href='index.php?filter=2'>Medium Priority</a></h4>\n";
 		bpi_view('2');

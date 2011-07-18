@@ -1,0 +1,20 @@
+1.3  7/18/2011
+=====================
+- added support for hosts as BPI group members 
+- updated status parsing functions, removed 'ereg' functions
+- Added version number and support URL 
+
+
+1.2
+=====================
+- Fixed a bug with the check_bpi.php file. Suppressed any error output from the command-line check in Nagios 
+
+1.1
+======================
+- Fixed bugs with the fix_config tool, so errors in configuration file can be corrected easily.
+- Cleaner error output and setup instructions
+- check_bpi.php *should* work now for Core and XI.  
+
+1.0
+======================
+- Fixed a bug in the host/service detail urls 11/30/2010 
