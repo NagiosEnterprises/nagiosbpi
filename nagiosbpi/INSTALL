@@ -72,7 +72,8 @@ Installation on Nagios XI
 ==========================================
 - Download the zip file onto a machine that can access XI from the web interface
 - ***For upgrades***:
-	- cp /usr/local/nagiosxi/html/includes/components/nagiosbpi/bpi.conf /tmp/bpi.conf- Go to the Admin->Manage Components page
+	- cp /usr/local/nagiosxi/html/includes/components/nagiosbpi/bpi.conf /tmp/bpi.conf
+- Go to the Admin->Manage Components page
 - Upload the zip file using the upload tool on the page
 - chmod +x /usr/local/nagiosxi/html/includes/components/nagiosbpi/set_bpi_perms.sh
 - Execute the /usr/local/nagiosxi/html/includes/components/nagiosbpi/set_bpi_perms.sh script 
