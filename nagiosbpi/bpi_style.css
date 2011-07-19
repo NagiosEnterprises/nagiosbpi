@@ -72,13 +72,13 @@ a img {border:none; }
 tr.even { background-color: #Efefef; } /* dark table rows */
 tr.odd {background-color: #FFF; }      /* light table rows */
 
-.Ok { background-color: #b2ff5f; }  /*status colors */
+.Ok, .Up { background-color: #b2ff5f; }  /*status colors */
 .Warning { background-color: #FEFF5F; }
-.Critical {  background-color: #FF795F; }
-.Unknown  { background-color: #FFC45F; }
+.Critical, .Down {  background-color: #FF795F; }
+.Unknown , .Unreachable { background-color: #FFC45F; }
 
 /*fixed width for state td */
-td.Ok, th.Ok, td.Warning, th.Warning, td.Critical, th.Critical, td.Unknown, th.Unknown {  width: 50px;}
+td.Ok, th.Ok, td.Warning, th.Warning, td.Critical, th.Critical, td.Unknown, th.Unknown, td.Up, td.Down, td.Unreachable {  width: 50px;}
 
 /*error messages */
 .error { color:red; }

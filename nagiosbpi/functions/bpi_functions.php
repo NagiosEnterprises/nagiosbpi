@@ -173,32 +173,54 @@ TABLE;
 
 /////////////////////////////////////////////////////////////////////////////
 //expecting int 0-3
-//returns state code: OK, WARNING, CRITICAL, UNKNOWN 
-function return_state($arg)
+//returns service state code: OK, WARNING, CRITICAL, UNKNOWN 
+//returns host state code: UP, DOWN, UNREACHABLE 
+function return_state($arg,$type='')
 {
-	switch($arg)
+	if($type=='host')
 	{
-		case 0:
-		$state = "Ok";
-		break;
-		
-		case 1:
-		$state = "Warning";
-		break;
-		
-		case 2:
-		$state = "Critical";
-		break;
-		
-		case 3:
-		$state = "Unknown";
-		break;
-		
-		default:
-		$state = "Unknown";
-		break;
-		
-	}//end switch 
+		switch($arg)
+		{
+			case 0:
+			$state = "Up";
+			break;
+			
+			case 1:
+			$state = "Down";
+			break;			
+			
+			default:
+			$state = "Unreachable";
+			break;
+			
+		}//end switch 
+	}
+	else 
+	{
+		switch($arg)
+		{
+			case 0:
+			$state = "Ok";
+			break;
+			
+			case 1:
+			$state = "Warning";
+			break;
+			
+			case 2:
+			$state = "Critical";
+			break;
+			
+			case 3:
+			$state = "Unknown";
+			break;
+			
+			default:
+			$state = "Unknown";
+			break;
+			
+		}//end switch 
+	}
 	return $state;
 }//end method return_service_state() 
 

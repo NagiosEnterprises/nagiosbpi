@@ -351,7 +351,7 @@ class BpGroup
 			else
 			{  $class = 'odd';    }
 			
-			$state = return_state($child['current_state']);
+			$state = return_state($child['current_state'],$child['type']); 
 			$optmarker = ($child['option']== '|' ? '**' : '');
 			
 			if($child['type'] == 'service') //add a type property for group or service 
@@ -399,7 +399,7 @@ LISTITEM;
 					$hostlink = HOSTDETAIL.$host;
 					//http://localhost/nagios/cgi-bin/extinfo.cgi?type=2&host=XI+Demo&service=HTTP
 				}
-			
+				
 				//BEGIN hereroc string		
 				$listitem=<<<LISTITEM
 						 <li class='servicelisting'>

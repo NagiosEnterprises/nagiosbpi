@@ -63,6 +63,7 @@ else
 //initialize variables 
 $info;
 $service_details;
+$host_details;
 $objects = array();
 $obj_count = 0;
 $statecount = 0;
@@ -79,6 +80,7 @@ function do_stuff()
 	global $input;
 	global $info;
 	global $service_details;
+	global $host_details;
 	global $objects;
 	global $obj_count;
 	global $statecount;
@@ -95,7 +97,7 @@ function do_stuff()
 		
 	
 	$info = get_info();
-	$service_details = grab_details('service'); //global array of service status 
+	list($host_details,$service_details) = grab_details(); //global array of service status 
 	
 	//initialize all BpGroup instances and determine properties of all groups
 	

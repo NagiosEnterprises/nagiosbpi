@@ -1,3 +1,10 @@
+1.3.1 7/19/2011
+=====================
+- Bug fixes for group state check
+- Fixed bug with host states and css color 
+- Fixed bug where hosts didn't preload into the "Edit" forms 
+
+
 1.3  7/18/2011
 =====================
 - added support for hosts as BPI group members 

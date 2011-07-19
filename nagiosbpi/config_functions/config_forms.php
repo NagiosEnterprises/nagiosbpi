@@ -331,7 +331,7 @@ RIGHTFORM;
 		if($member['type'] == 'group')
 		{
 			//do group stuff
-			$title = $member['title'].' (Group)';
+			$title = 'G: '.$member['title'];
 			$value = '$'.$member['index'];
 			$opt = $member['option'];
 			print "\npreload('$title','$value', '$opt');\n";
@@ -340,8 +340,17 @@ RIGHTFORM;
 		if($member['type'] == 'service')
 		{
 			//do service stuff
-			$title = $member['host_name'].';'.$member['service_description'];
+			$title = 'S: '.$member['host_name'].';'.$member['service_description'];
 			$value = $member['host_name'].';'.$member['service_description'];
+			$opt = $member['option'];
+			print "\npreload('$title','$value','$opt');\n";
+			
+		}
+		if($member['type'] == 'host')
+		{
+			//do service stuff
+			$title = 'H: '.$member['host_name'];
+			$value = $member['host_name'].';NULL';
 			$opt = $member['option'];
 			print "\npreload('$title','$value','$opt');\n";
 			

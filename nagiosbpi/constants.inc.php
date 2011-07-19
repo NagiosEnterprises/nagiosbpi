@@ -4,17 +4,20 @@
 
 define('DIRBASE', dirname(__FILE__)); //assigns current directory as root 
 
-define('VERSION','1.3'); 
+define('VERSION','1.3.1'); 
 
 $globals = fetch_globals();
 
-//get server web address 
-$SERVER_BASE = isset($_SERVER['SERVER_NAME']) ? 
-                      $_SERVER['SERVER_NAME'] : $_SERVER['SERVER_ADDR'];
- 
-$PROTO = isset($_SERVER['HTTPS']) ? 'https' : 'http';
-$base = $PROTO.'://'.$SERVER_BASE;
-define('SERVERBASE', $base);
+//only used for web front-end 
+if(!isset($_SERVER['SERVER_ADDR']))  $_SERVER['SERVER_ADDR'] = 'http://localhost/'; 
+
+	//get server web address 
+	$SERVER_BASE = isset($_SERVER['SERVER_NAME']) ? 
+						  $_SERVER['SERVER_NAME'] : $_SERVER['SERVER_ADDR'];
+	 
+	$PROTO = isset($_SERVER['HTTPS']) ? 'https' : 'http';
+	$base = $PROTO.'://'.$SERVER_BASE;
+	define('SERVERBASE', $base);
 
 
 //assign constants if they've been set correctly 
