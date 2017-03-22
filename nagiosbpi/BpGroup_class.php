@@ -741,7 +741,7 @@ TABLEITEM;
 					//check against critical threshold 
 					if($problemcount > $this->critical_threshold && $this->critical_threshold !=0)
 					{
-						//critical theshold hit, break loop and return state 
+						//critical threshold hit, break loop and return state 
 						$status = 2;
 						continue;
 					}
