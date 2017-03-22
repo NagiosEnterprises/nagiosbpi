@@ -57,7 +57,7 @@ class BpGroup
 	var $group_children = array();    //use method to add processed group arrays to this array
 	var $memberlist = array();      //main member array, displaying both services and groups 
 	var $child_states = array(); 
-	var $parents = array();      //use to build heirarchy	
+	var $parents = array();      //use to build hierarchy	
 	var $has_group_children; //boolean 
 	var $state; //current state of group 
 	var $title; //title used for display output 
@@ -321,7 +321,7 @@ class BpGroup
 				//print "Service: $service <br/> Host: $host <br /> State: $state <br /> Output: $plugin_output <br />";
 				$this->append_service_children($servicedata);
 				$this->append_memberlist($servicedata);							  
-				//create simple display function to seperate tags  
+				//create simple display function to separate tags  
 				//print "<li>".$items[0]." | ".$items[1]."</li>";
 			}	//end main IF 
 		}  //end FOREACH  		
@@ -741,7 +741,7 @@ TABLEITEM;
 					//check against critical threshold 
 					if($problemcount > $this->critical_threshold && $this->critical_threshold !=0)
 					{
-						//critical theshold hit, break loop and return state 
+						//critical threshold hit, break loop and return state 
 						$status = 2;
 						continue;
 					}
@@ -760,7 +760,7 @@ TABLEITEM;
 						break;
 						
 						case 3:
-						$status = 2;  //uknown service will create critical group status
+						$status = 2;  //unknown service will create critical group status
 						break;
 						
 						default: //do nothing for other states 
