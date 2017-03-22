@@ -760,7 +760,7 @@ TABLEITEM;
 						break;
 						
 						case 3:
-						$status = 2;  //uknown service will create critical group status
+						$status = 2;  //unknown service will create critical group status
 						break;
 						
 						default: //do nothing for other states 
