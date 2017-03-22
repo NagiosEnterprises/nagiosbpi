@@ -321,7 +321,7 @@ class BpGroup
 				//print "Service: $service <br/> Host: $host <br /> State: $state <br /> Output: $plugin_output <br />";
 				$this->append_service_children($servicedata);
 				$this->append_memberlist($servicedata);							  
-				//create simple display function to seperate tags  
+				//create simple display function to separate tags  
 				//print "<li>".$items[0]." | ".$items[1]."</li>";
 			}	//end main IF 
 		}  //end FOREACH  		
