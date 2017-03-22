@@ -57,7 +57,7 @@ class BpGroup
 	var $group_children = array();    //use method to add processed group arrays to this array
 	var $memberlist = array();      //main member array, displaying both services and groups 
 	var $child_states = array(); 
-	var $parents = array();      //use to build heirarchy	
+	var $parents = array();      //use to build hierarchy	
 	var $has_group_children; //boolean 
 	var $state; //current state of group 
 	var $title; //title used for display output 
