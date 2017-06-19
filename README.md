@@ -14,8 +14,8 @@ That's what this plugin was made for!
 
 Installation on Nagios XI
 -------------------------
-<b>BPI should be installed by default on Nagios XI</b>. In the case that it 
-isn't, follow these steps:
+<b>BPI should be installed by default on Nagios XI</b>. If you're using a
+legacy version of Nagios XI, follow these steps:
 
 1. Download the zip file onto a machine that can access XI from the web interface.
 
@@ -64,12 +64,12 @@ Installation on Nagios Core
 
 Running a check for BPI Groups on Nagios XI
 -------------------------------------------
-
 Please refer to our documentation at 
 https://assets.nagios.com/downloads/nagiosxi/docs/Using_Nagios_BPI_v2.pdf
+for instructions on using BPI with Nagios XI.
 
-If your XI installation is missing the BPI wizard, you can download and 
-install it from 
+If your XI installation is missing the BPI wizard, or if you have a legacy 
+version of Nagios XI, you can download and install the BPI wizard from 
 http://exchange.nagios.org/directory/Addons/Configuration/Configuration-Wizards/Nagios-Business-Process-Intelligence-%28BPI%29-Wizard/details
 
 
